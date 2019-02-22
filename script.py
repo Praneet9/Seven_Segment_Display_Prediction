@@ -15,14 +15,18 @@ DATASET_PATH = 'dataset/'
 if not os.path.exists(DATASET_PATH):
     os.mkdir(DATASET_PATH[:-1])
 
-numbers = list(range(0,10))
+# numbers = list(range(0,10)) + ['.']
+numbers = ['.']
+
 # characters = list(string.ascii_uppercase)
 
 ALL_CHARS = numbers
 
-for character in ALL_CHARS:
-    if not os.path.exists(DATASET_PATH + str(character)):
-        os.mkdir(DATASET_PATH + str(character))
+# for character in ALL_CHARS:
+#     if not os.path.exists(DATASET_PATH + str(character)):
+#         os.mkdir(DATASET_PATH + str(character))
+
+os.mkdir(DATASET_PATH + 'dot')
 
 # iterating through all the fonts in the directory
 for font_file in tqdm(os.listdir('fonts/')):
@@ -31,6 +35,8 @@ for font_file in tqdm(os.listdir('fonts/')):
     for character in ALL_CHARS:
         
         character = str(character)
+
+        direc_charac = 'dot'
 
         for size in range(FONT_SIZE, 29):
 
@@ -50,8 +56,8 @@ for font_file in tqdm(os.listdir('fonts/')):
             drawn_canvas = np.array(canvas)
 
             # Directory to save the drawn_canvas
-            directory_grayscale = DATASET_PATH + character + '/' + font_file[:-4] + '_' + str(size) + '_' + 'grayscale.jpg'
-            directory_binary = DATASET_PATH + character + '/' + font_file[:-4] + '_' + str(size) + '_' + 'binary.jpg'
+            directory_grayscale = DATASET_PATH + direc_charac + '/' + font_file[:-4] + '_' + str(size) + '_' + 'grayscale.jpg'
+            directory_binary = DATASET_PATH + direc_charac + '/' + font_file[:-4] + '_' + str(size) + '_' + 'binary.jpg'
 
             # Saving grayscaled image to directory 
             cv2.imwrite(directory_grayscale, drawn_canvas)
